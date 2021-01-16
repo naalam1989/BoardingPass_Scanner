@@ -9,7 +9,7 @@ class BoardingPassApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        //Start Room Client
+        //Start Room
         RoomClient.startRoom(applicationContext)
 
     }

@@ -31,7 +31,7 @@ class MainFragment : Fragment() {
 
         view?.findViewById<RecyclerView>(R.id.recyclerView)?.run {
             layoutManager = LinearLayoutManager(context)
-            adapter = RecyclerViewAdapter(context)
+            adapter = RecyclerViewAdapter(context, viewModel)
             viewModel.getAllBoardingPass().observe(viewLifecycleOwner, { result ->
                 if (result.isNullOrEmpty()) {
                     //Show Add Boarding Pass Layout

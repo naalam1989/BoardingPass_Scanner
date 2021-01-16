@@ -8,9 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alam.boardingpassscanner.R
 import com.alam.boardingpassscanner.databinding.BoardingItemLayoutBinding
 import com.alam.boardingpassscanner.datalayer.database.room.BoardingPassEntity
+import com.alam.boardingpassscanner.presentationlayer.viewmodel.MainViewModel
 
 
-class RecyclerViewAdapter(context: Context) : RecyclerView.Adapter<RecyclerViewAdapter.RepositoryViewHolder>() {
+class RecyclerViewAdapter(context: Context, val viewModel: MainViewModel) : RecyclerView.Adapter<RecyclerViewAdapter.RepositoryViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private val boardingPasses = mutableListOf<BoardingPassEntity>()
@@ -39,6 +40,7 @@ class RecyclerViewAdapter(context: Context) : RecyclerView.Adapter<RecyclerViewA
 
         fun bindView(item: BoardingPassEntity) {
             binding.boardingPass = item
+            binding.viewModel = viewModel
         }
 
     }
