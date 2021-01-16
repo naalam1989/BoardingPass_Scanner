@@ -31,6 +31,7 @@ class RecyclerViewAdapter(context: Context, val viewModel: MainViewModel) : Recy
     }
 
     fun setData(list: List<BoardingPassEntity>) {
+        //TODO: Can be optimised to remove the item deleted using #notifyItemRemoved
         boardingPasses.clear()
         boardingPasses.addAll(list)
         notifyDataSetChanged()

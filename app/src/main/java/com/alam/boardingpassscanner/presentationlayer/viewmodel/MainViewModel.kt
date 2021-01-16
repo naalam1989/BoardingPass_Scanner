@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alam.boardingpassscanner.datalayer.database.room.BoardingPassEntity
+import com.alam.boardingpassscanner.domainlayer.usecase.AddNewBoardingPass
 import com.alam.boardingpassscanner.domainlayer.usecase.DeleteBoardingPass
 import com.alam.boardingpassscanner.domainlayer.usecase.GetAllBoardingPass
 import kotlinx.coroutines.launch
@@ -18,6 +19,25 @@ class MainViewModel : ViewModel() {
     fun deleteBoardingPass(boardingPassEntity: BoardingPassEntity) {
         viewModelScope.launch {
             DeleteBoardingPass().use(boardingPassEntity)
+        }
+    }
+
+    fun launchBoardingPassScanner() {
+        //Temporary Code
+        viewModelScope.launch {
+            val pass = BoardingPassEntity(
+                "Rifah",
+                "Farhat",
+                "New Delhi",
+                "Doha",
+                "QA 375",
+                "245",
+                "21J",
+                "AZERTY",
+                "WE34TY"
+            )
+
+            AddNewBoardingPass().use(pass)
         }
     }
 
