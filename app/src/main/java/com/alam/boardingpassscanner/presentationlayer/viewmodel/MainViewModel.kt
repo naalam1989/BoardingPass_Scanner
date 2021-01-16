@@ -26,15 +26,15 @@ class MainViewModel : ViewModel() {
         //Temporary Code
         viewModelScope.launch {
             val pass = BoardingPassEntity(
-                "Rifah",
-                "Farhat",
+                "Nadeem",
+                "Alam",
                 "New Delhi",
                 "Doha",
                 "QA 375",
                 "245",
                 "21J",
                 "AZERTY",
-                "WE34TY"
+                "JWC56H"
             )
 
             AddNewBoardingPass().use(pass)

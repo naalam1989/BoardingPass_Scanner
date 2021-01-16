@@ -51,10 +51,15 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
 
+    implementation "androidx.security:security-crypto:1.1.0-alpha03"
+
     //room
     implementation 'androidx.room:room-runtime:2.2.6'
     implementation "androidx.room:room-ktx:2.2.6"
     kapt 'androidx.room:room-compiler:2.2.6'
+
+    //sqlcipher
+    implementation 'net.zetetic:android-database-sqlcipher:4.4.2'
 
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

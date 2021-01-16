@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.room.Room
 import com.alam.boardingpassscanner.datalayer.database.room.BoardingPassDatabase
 import com.alam.boardingpassscanner.datalayer.database.room.BoardingPassEntity
+import net.sqlcipher.database.SQLiteDatabase
+import net.sqlcipher.database.SupportFactory
 
 class RoomClient private constructor(context: Context) {
 
@@ -12,7 +14,14 @@ class RoomClient private constructor(context: Context) {
         context,
         BoardingPassDatabase::class.java,
         BoardingPassDatabase::class.java.simpleName
-    ).build()
+    ).run {
+        //Encrypt Database
+        //TODO: Use signing keystore
+        val passphrase: ByteArray = SQLiteDatabase.getBytes("keystore.passphrase".toCharArray())
+        val factory = SupportFactory(passphrase)
+        openHelperFactory(factory)
+        build()
+    }
 
     companion object {
         private lateinit var roomClient: RoomClient
