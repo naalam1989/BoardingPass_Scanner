@@ -5,8 +5,8 @@ import com.alam.boardingpassscanner.datalayer.database.room.BoardingPassEntity
 
 class AddNewBoardingPass {
 
-    suspend fun use(boardingPassEntity: BoardingPassEntity) {
-        RoomClient.getRoomClient().insertBoardingPass(boardingPassEntity)
+    suspend fun use(boardingPass: BoardingPassEntity) {
+        RoomClient.getRoomClient().insertBoardingPass(boardingPass)
     }
 
 }

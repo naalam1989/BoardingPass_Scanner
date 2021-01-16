@@ -12,8 +12,8 @@ interface BoardingPassDao {
     fun getAllCBoardingPass() : LiveData<List<BoardingPassEntity>>
 
     @Delete
-    suspend fun deleteBoardingPass(pass: BoardingPassEntity)
+    suspend fun deleteBoardingPass(boardingPass: BoardingPassEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertBoardingPass(boardingPassEntity: BoardingPassEntity)
+    suspend fun insertBoardingPass(boardingPass: BoardingPassEntity)
 }

@@ -32,12 +32,12 @@ class RoomClient private constructor(context: Context) {
         return boardingPassDatabase.boardingPassDao().getAllCBoardingPass()
     }
 
-    suspend fun insertBoardingPass(boardingPassEntity: BoardingPassEntity) {
-        boardingPassDatabase.boardingPassDao().insertBoardingPass(boardingPassEntity)
+    suspend fun insertBoardingPass(boardingPass: BoardingPassEntity) {
+        boardingPassDatabase.boardingPassDao().insertBoardingPass(boardingPass)
     }
 
-    suspend fun deleteBoardingPass(boardingPassEntity: BoardingPassEntity) {
-        boardingPassDatabase.boardingPassDao().deleteBoardingPass(boardingPassEntity)
+    suspend fun deleteBoardingPass(boardingPass: BoardingPassEntity) {
+        boardingPassDatabase.boardingPassDao().deleteBoardingPass(boardingPass)
     }
 
 }

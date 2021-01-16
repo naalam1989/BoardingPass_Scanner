@@ -16,9 +16,9 @@ class MainViewModel : ViewModel() {
         return GetAllBoardingPass().use()
     }
 
-    fun deleteBoardingPass(boardingPassEntity: BoardingPassEntity) {
+    fun deleteBoardingPass(boardingPass: BoardingPassEntity) {
         viewModelScope.launch {
-            DeleteBoardingPass().use(boardingPassEntity)
+            DeleteBoardingPass().use(boardingPass)
         }
     }
 

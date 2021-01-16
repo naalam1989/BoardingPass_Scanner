@@ -5,8 +5,8 @@ import com.alam.boardingpassscanner.datalayer.database.room.BoardingPassEntity
 
 class DeleteBoardingPass {
 
-    suspend fun use(boardingPassEntity: BoardingPassEntity) {
-        RoomClient.getRoomClient().deleteBoardingPass(boardingPassEntity)
+    suspend fun use(boardingPass: BoardingPassEntity) {
+        RoomClient.getRoomClient().deleteBoardingPass(boardingPass)
     }
 
 }
