@@ -1,4 +1,4 @@
-package com.alam.boardingpassscanner.presentationlayer.view
+package com.alam.boardingpassscanner.presentationlayer.view.launcher
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

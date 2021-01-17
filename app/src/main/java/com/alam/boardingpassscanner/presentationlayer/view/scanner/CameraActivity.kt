@@ -1,4 +1,4 @@
-package com.alam.boardingpassscanner
+package com.alam.boardingpassscanner.presentationlayer.view.scanner
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -16,6 +16,7 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
+import com.alam.boardingpassscanner.R
 import com.google.mlkit.vision.barcode.Barcode
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
 import com.google.mlkit.vision.barcode.BarcodeScanning

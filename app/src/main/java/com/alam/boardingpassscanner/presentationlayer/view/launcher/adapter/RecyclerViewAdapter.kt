@@ -1,4 +1,4 @@
-package com.alam.boardingpassscanner.presentationlayer.view.adapter
+package com.alam.boardingpassscanner.presentationlayer.view.launcher.adapter
 
 import android.content.Context
 import android.view.LayoutInflater

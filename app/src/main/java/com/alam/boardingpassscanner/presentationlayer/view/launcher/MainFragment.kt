@@ -1,4 +1,4 @@
-package com.alam.boardingpassscanner.presentationlayer.view
+package com.alam.boardingpassscanner.presentationlayer.view.launcher
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alam.boardingpassscanner.R
 import com.alam.boardingpassscanner.databinding.MainFragmentBinding
-import com.alam.boardingpassscanner.presentationlayer.view.adapter.RecyclerViewAdapter
+import com.alam.boardingpassscanner.presentationlayer.view.launcher.adapter.RecyclerViewAdapter
 import com.alam.boardingpassscanner.presentationlayer.viewmodel.MainViewModel
 
 class MainFragment : Fragment() {

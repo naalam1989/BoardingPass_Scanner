@@ -13,8 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BoardingPassScanner">
-        <activity android:name=".CameraActivity"></activity>
-        <activity android:name=".presentationlayer.view.MainActivity">
+        <activity android:name=".presentationlayer.view.scanner.CameraActivity"></activity>
+        <activity android:name=".presentationlayer.view.launcher.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

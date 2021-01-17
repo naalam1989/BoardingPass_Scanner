@@ -5,10 +5,10 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alam.boardingpassscanner.CameraActivity
 import com.alam.boardingpassscanner.datalayer.database.room.BoardingPassEntity
 import com.alam.boardingpassscanner.domainlayer.usecase.DeleteBoardingPass
 import com.alam.boardingpassscanner.domainlayer.usecase.GetAllBoardingPass
+import com.alam.boardingpassscanner.presentationlayer.view.scanner.CameraActivity
 import kotlinx.coroutines.launch
 
 
