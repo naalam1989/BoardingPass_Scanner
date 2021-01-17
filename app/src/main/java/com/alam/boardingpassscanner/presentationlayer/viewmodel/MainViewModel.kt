@@ -1,14 +1,13 @@
 package com.alam.boardingpassscanner.presentationlayer.viewmodel
 
-import android.content.Intent
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alam.boardingpassscanner.datalayer.database.room.BoardingPassEntity
+import com.alam.boardingpassscanner.domainlayer.usecase.AddNewBoardingPass
 import com.alam.boardingpassscanner.domainlayer.usecase.DeleteBoardingPass
 import com.alam.boardingpassscanner.domainlayer.usecase.GetAllBoardingPass
-import com.alam.boardingpassscanner.presentationlayer.view.scanner.CameraActivity
 import kotlinx.coroutines.launch
 
 
@@ -25,11 +24,30 @@ class MainViewModel : ViewModel() {
     }
 
     fun launchBoardingPassScanner(view: View) {
-        view.context.apply {
+        /*view.context.apply {
             val intent = Intent(this, CameraActivity::class.java)
             startActivity(intent)
-        }
+        }*/
+        temp()
+    }
 
+    fun temp() {
+        //Temporary Code
+        viewModelScope.launch {
+            val pass = BoardingPassEntity(
+                    "Nadeem",
+                    "Alam",
+                    "New Delhi",
+                    "Doha",
+                    "QA 375",
+                    "245",
+                    "21J",
+                    "AZERTY",
+                    "JWC56H"
+            )
+
+            AddNewBoardingPass().use(pass)
+        }
     }
 
 }

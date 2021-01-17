@@ -26,6 +26,7 @@ class MainFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.main_fragment, container, false)
+        binding.lifecycleOwner = this
         return binding.root
     }
 
@@ -40,12 +41,21 @@ class MainFragment : Fragment() {
                 if (result.isNullOrEmpty()) {
                     //Clear Recycler View
                     removeAllViewsInLayout()
+                    visibility = View.GONE
 
-                    //Show Add Boarding Pass Layout
+                    //Show Add Boarding Pass
+                    binding.addCueView.visibility = View.VISIBLE
 
                 } else {
                     //Update Recycler View
+                    visibility = View.VISIBLE
+
+                    //Hide Add Boarding Pass
+                    binding.addCueView.visibility = View.GONE
+
+                    //Update Adapter
                     (adapter as RecyclerViewAdapter).setData(result)
+
                 }
             })
         }
