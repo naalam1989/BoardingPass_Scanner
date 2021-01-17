@@ -29,7 +29,7 @@
         android:id="@+id/add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="@{() -> viewModel.launchBoardingPassScanner()}"
+        android:onClick="@{(view) -> viewModel.launchBoardingPassScanner(view)}"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/add_margin"
         android:contentDescription="@null"
