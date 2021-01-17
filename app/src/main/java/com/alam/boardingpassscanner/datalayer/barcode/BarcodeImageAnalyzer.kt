@@ -20,21 +20,21 @@ class BarcodeImageAnalyzer : ImageAnalysis.Analyzer {
             // Pass image to an ML Kit Vision API
             val scanner = BarcodeScanning.getClient()
             scanner.process(image)
-                    .addOnSuccessListener { barcodes ->
-                        // Task completed successfully
-                        if (barcodes.size > 0) {
-                            Log.i("Nadeem", barcodes[0].rawValue!!)
+                .addOnSuccessListener { barcodes ->
+                    // Task completed successfully
+                    if (barcodes.size > 0) {
+                        Log.i("Nadeem", barcodes[0].rawValue!!)
 
-                            //Finish Activity
-                            liveDataAnalyser.postValue(barcodes[0].rawValue)
-                        } else {
-                            imageProxy.close()
-                        }
+                        //Finish Activity
+                        liveDataAnalyser.postValue(barcodes[0].rawValue)
+                    } else {
+                        imageProxy.close()
                     }
-                    .addOnFailureListener {
-                        // Task failed with an exception
-                        Log.e("Nadeem", "addOnFailureListener")
-                    }
+                }
+                .addOnFailureListener {
+                    // Task failed with an exception
+                    Log.e("Nadeem", "addOnFailureListener")
+                }
         }
     }
 }
