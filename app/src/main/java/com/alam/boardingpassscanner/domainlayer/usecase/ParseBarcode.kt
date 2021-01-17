@@ -26,15 +26,15 @@ class ParseBarcode {
             val departureDate = convertJulianDate(julianDate.toInt())
 
             return BoardingPassEntity(
-                    firstName,
-                    lastName,
-                    fromAirport,
-                    toAirport,
-                    flight,
-                    departureDate,
-                    seat,
-                    sequenceNumber,
-                    booking
+                    firstName.trim(),
+                    lastName.trim(),
+                    fromAirport.trim(),
+                    toAirport.trim(),
+                    flight.trim(),
+                    departureDate.trim(),
+                    if (seat[0] != '0') seat else seat.substring(1, seat.length),
+                    Integer.parseInt(sequenceNumber.trim()).toString(),
+                    booking.trim()
             )
         } catch (e: Exception) {
             Log.e("Nadeem", "Unable to parse")

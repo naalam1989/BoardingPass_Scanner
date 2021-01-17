@@ -3,27 +3,13 @@ package com.alam.boardingpassscanner.presentationlayer.view.scanner
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
-import android.util.Size
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageAnalysis
-import androidx.camera.core.ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST
-import androidx.camera.core.ImageProxy
-import androidx.camera.core.Preview
-import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProvider
 import com.alam.boardingpassscanner.R
-import com.google.mlkit.vision.barcode.Barcode
-import com.google.mlkit.vision.barcode.BarcodeScannerOptions
-import com.google.mlkit.vision.barcode.BarcodeScanning
-import com.google.mlkit.vision.common.InputImage
-import kotlinx.android.synthetic.main.activity_camera.*
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
+import com.alam.boardingpassscanner.presentationlayer.viewmodel.CameraViewModel
 
 class CameraActivity : AppCompatActivity() {
 
@@ -32,21 +18,26 @@ class CameraActivity : AppCompatActivity() {
         private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
     }
 
-    private lateinit var cameraExecutor: ExecutorService
+    private lateinit var viewModel: CameraViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
+        viewModel = ViewModelProvider(this).get(CameraViewModel::class.java)
+        viewModel.liveDataActivity.observe(this, {
+            if (!it) {
+                Toast.makeText(this, "Invalid Barcode", Toast.LENGTH_LONG).show()
+            }
+            finish()
+        })
 
         // Request camera permissions
         if (allPermissionsGranted()) {
-            startCamera()
+            viewModel.startCamera(this)
         } else {
             ActivityCompat.requestPermissions(
                 this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
         }
-
-        cameraExecutor = Executors.newSingleThreadExecutor()
     }
 
     override fun onRequestPermissionsResult(
@@ -54,7 +45,7 @@ class CameraActivity : AppCompatActivity() {
         IntArray) {
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (allPermissionsGranted()) {
-                startCamera()
+                viewModel.startCamera(this)
             } else {
                 Toast.makeText(this,
                     "Permissions not granted by the user.",
@@ -64,87 +55,9 @@ class CameraActivity : AppCompatActivity() {
         }
     }
 
-    private fun startCamera() {
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
-
-        cameraProviderFuture.addListener({
-            // Used to bind the lifecycle of cameras to the lifecycle owner
-            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
-
-            // Preview
-            val preview = Preview.Builder()
-                .build()
-                .also {
-                    it.setSurfaceProvider(viewFinder.createSurfaceProvider())
-                }
-
-            val imageAnalysis = ImageAnalysis.Builder()
-                .setTargetResolution(Size(1280, 720))
-                .setBackpressureStrategy(STRATEGY_KEEP_ONLY_LATEST)
-                .build()
-                .also {
-                    it.setAnalyzer(cameraExecutor, BarcodeImageAnalyzer())
-                }
-
-            // Select back camera as a default
-            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
-
-            try {
-                // Unbind use cases before rebinding
-                cameraProvider.unbindAll()
-
-                // Bind use cases to camera
-                cameraProvider.bindToLifecycle(
-                    this as LifecycleOwner, cameraSelector, imageAnalysis, preview)
-
-            } catch(exc: Exception) {
-                Log.e("Nadeem", "Use case binding failed", exc)
-            }
-
-        }, ContextCompat.getMainExecutor(this))
-    }
-
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(
             baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        cameraExecutor.shutdown()
-    }
-
-    private inner class BarcodeImageAnalyzer : ImageAnalysis.Analyzer {
-
-        @androidx.camera.core.ExperimentalGetImage
-        override fun analyze(imageProxy: ImageProxy) {
-            val mediaImage = imageProxy.image
-            if (mediaImage != null) {
-                val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
-
-                val options = BarcodeScannerOptions.Builder()
-                    .setBarcodeFormats(
-                        Barcode.FORMAT_PDF417,
-                        Barcode.FORMAT_AZTEC)
-                    .build()
-
-                // Pass image to an ML Kit Vision API
-                val scanner = BarcodeScanning.getClient(options)
-                scanner.process(image)
-                    .addOnSuccessListener { barcodes ->
-                        // Task completed successfully
-                        if (barcodes.size > 0) {
-                            Log.i("Nadeem", barcodes[0].rawValue!!)
-                            finish()
-                        } else {
-                            imageProxy.close()
-                        }
-                    }
-                    .addOnFailureListener {
-                        // Task failed with an exception
-                        Log.e("Nadeem", "addOnFailureListener")
-                    }
-            }
-        }
-    }
 }
