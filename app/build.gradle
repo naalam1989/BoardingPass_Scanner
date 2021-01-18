@@ -52,6 +52,10 @@ android {
         exclude("META-INF/*.kotlin_module")
         exclude 'META-INF/library_release.kotlin_module'
     }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 dependencies {
@@ -92,7 +96,8 @@ dependencies {
     implementation "androidx.camera:camera-view:1.0.0-alpha14"
 
     testImplementation 'junit:junit:4.13.1'
-    testImplementation 'org.mockito:mockito-core:2.19.0'
+    testImplementation 'org.mockito:mockito-core:3.7.7'
+    testImplementation 'org.mockito:mockito-inline:3.7.7'
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.1'
 
     androidTestImplementation 'org.mockito:mockito-android:2.19.0'
