@@ -42,14 +42,14 @@ class BoardingPassDaoTest {
     private lateinit var dao: BoardingPassDao
 
     private val boardingPass = BoardingPassEntity(
-        "Nadeem",
-        "Alam",
-        "New Delhi",
-        "Doha",
+        "NADEEM",
+        "ALAM",
+        "DEL",
+        "DOH",
         "QA 375",
-        "245",
+        "Feb 18",
         "21J",
-        "AZERTY",
+        "1",
         "JWC56H"
     )
 

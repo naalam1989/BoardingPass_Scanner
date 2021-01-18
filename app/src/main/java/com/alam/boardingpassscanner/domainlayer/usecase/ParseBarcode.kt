@@ -17,8 +17,8 @@ class ParseBarcode {
             val booking = barcode.substring(23, 30)
             val fromAirport = barcode.substring(30, 33)
             val toAirport = barcode.substring(33, 36)
-            val flightCarrier = barcode.substring(36, 39)
-            val flightNumber = barcode.substring(39, 44)
+            val flightCarrier = barcode.substring(36, 39).trim()
+            val flightNumber = barcode.substring(39, 44).trim()
             val flight = "$flightCarrier $flightNumber"
             val julianDate = barcode.substring(44, 47)
             val seat = barcode.substring(48, 52)
